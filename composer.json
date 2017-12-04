@@ -36,7 +36,6 @@
     "phpspec/prophecy": "^1.7",
     "phpmd/phpmd": "2.3.*",
     "squizlabs/php_codesniffer": "2.*",
-    "leaphub/phpcs-symfony2-standard": "~2.0.0",
     "doctrine/doctrine-fixtures-bundle": "^2.3",
     "hautelook/alice-bundle": "^1.3",
     "liip/functional-test-bundle": "^1.6"
