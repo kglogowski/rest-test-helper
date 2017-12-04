@@ -1,0 +1,31 @@
+{
+  "name": "kglogowski/rest-test-helper",
+  "type": "symfony-bundle",
+  "keywords": [],
+  "description": "Library to help with testing rest api",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Krzysztof Głogowski",
+      "email": "k.glogowski2@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "RestTestHelper\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "RestTestHelper\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": ">=7.1.0",
+    "symfony/framework-bundle": "^2.7 || ^3.0",
+    "symfony/browser-kit": "^2.7 || ^3.0",
+    "symfony/var-dumper": "^2.7 || ^3.0",
+    "phpunit/phpunit": "6.4",
+    "doctrine/doctrine-bundle": "^1.6"
+  }
+}
