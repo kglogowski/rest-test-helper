@@ -9,6 +9,7 @@
             <argument type="service" id="rest_test_helper.node.type_checker" />
             <argument type="service" id="rest_test_helper.node.json_generator" />
         </service>
+
         <service id="rest_test_helper.node.json_generator" class="RestTestHelper\Generator\JsonNodeGenerator" />
         <service id="rest_test_helper.node.type_checker" class="RestTestHelper\Checker\NodeTypeChecker" />
     </services>
