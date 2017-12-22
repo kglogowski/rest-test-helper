@@ -30,6 +30,8 @@
   },
   "require-dev": {
     "phpunit/phpunit": "6.4",
+    "phpunit/php-invoker": "^1.1",
+    "liip/functional-test-bundle": "1.9.0",
     "phing/phing": "2.*",
     "sebastian/phpcpd": "2.0.*",
     "incenteev/composer-parameter-handler": "^2.1",
