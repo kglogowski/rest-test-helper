@@ -3,6 +3,7 @@
 namespace RestTestHelper\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
+use RestTestHelper\Checker\Interfaces\NodeContentCheckerInterface;
 use RestTestHelper\Crawler\ResponseCrawlerInterface;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Component\HttpFoundation\Request;
@@ -108,5 +109,22 @@ abstract class RestWebTestCase extends WebTestCase
         $crawler = $this->getContainer()->get('rest_test_helper.node.response_crawler');
 
         return $crawler->reset($this->getClient());
+    }
+
+    /**
+     * @param string $serviceName
+     *
+     * @return NodeContentCheckerInterface
+     * @throws \Exception
+     */
+    public function getChecker(string $serviceName): NodeContentCheckerInterface
+    {
+        $checker = $this->getClient()->getContainer()->get($serviceName);
+
+        if ($checker instanceof NodeContentCheckerInterface) {
+            return $checker;
+        }
+
+        throw new \Exception("Class " . get_class($checker) . " must implement " . NodeContentCheckerInterface::class);
     }
 }
