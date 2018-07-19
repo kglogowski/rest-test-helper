@@ -4,6 +4,7 @@ namespace RestTestHelper\Crawler;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\AssertionFailedError;
+use RestTestHelper\Bag\ParameterBag;
 use RestTestHelper\Decorator\ResponseXssi;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,10 +21,14 @@ use RestTestHelper\Model\NodeModel;
 class ResponseCrawler extends Assert implements ResponseCrawlerInterface
 {
     /**
+     * @var ParameterBag
+     */
+    protected $bag;
+
+    /**
      * @var NodeTypeChecker
      */
     protected $typeChecker;
-
 
     /**
      * @var NodeGeneratorInterface
@@ -68,6 +73,7 @@ class ResponseCrawler extends Assert implements ResponseCrawlerInterface
     {
         $this->typeChecker = $typeChecker;
         $this->nodeGenerator = $nodeGenerator;
+        $this->bag = new ParameterBag();
     }
 
     /**
@@ -80,6 +86,7 @@ class ResponseCrawler extends Assert implements ResponseCrawlerInterface
         $this->client = $client;
         $this->root = new NodeModel();
         $this->content = $this->root;
+        $this->bag = new ParameterBag();
 
         return $this;
     }
@@ -508,6 +515,24 @@ class ResponseCrawler extends Assert implements ResponseCrawlerInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addToBag(string $key): ResponseCrawlerInterface
+    {
+        $this->bag->set($key, $this->getActiveValue());
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getBag(): ParameterBag
+    {
+        return $this->bag;
     }
 
     /**

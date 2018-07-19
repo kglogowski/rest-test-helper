@@ -2,6 +2,7 @@
 
 namespace RestTestHelper\Crawler;
 
+use RestTestHelper\Bag\ParameterBag;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Component\HttpFoundation\Request;
 use RestTestHelper\Checker\Interfaces\NodeContentCheckerInterface;
@@ -185,4 +186,16 @@ interface ResponseCrawlerInterface
      * @return ResponseCrawlerInterface
      */
     public function assertActive(string $type, array $arguments = []): ResponseCrawlerInterface;
+
+    /**
+     * @param string $key
+     *
+     * @return ResponseCrawlerInterface
+     */
+    public function addToBag(string $key): ResponseCrawlerInterface;
+
+    /**
+     * @return ParameterBag
+     */
+    public function getBag(): ParameterBag;
 }
