@@ -29,7 +29,7 @@
     "doctrine/orm": "^2.5"
   },
   "require-dev": {
-    "phpunit/phpunit": "6.4",
+    "phpunit/phpunit": "^6.5",
     "phpunit/php-invoker": "^1.1",
     "liip/functional-test-bundle": "1.9.0",
     "phing/phing": "2.*",

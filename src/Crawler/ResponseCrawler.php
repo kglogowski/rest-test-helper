@@ -4,6 +4,7 @@ namespace RestTestHelper\Crawler;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\AssertionFailedError;
+use RestTestHelper\Decorator\ResponseXssi;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Component\HttpFoundation\Request;
 use RestTestHelper\Checker\Interfaces\NodeContentCheckerInterface;
@@ -101,11 +102,13 @@ class ResponseCrawler extends Assert implements ResponseCrawlerInterface
             $this->client->request($method, $this->content->getValue(), [], [], $header, $content);
             $response = $this->client->getResponse();
 
-            if (null != $response->getContent()) {
-                $this->assert(self::ASSERT_JSON, [$response->getContent()]);
+            $responseXssi = new ResponseXssi($response);
+
+            if (null != $responseXssi->getContent()) {
+                $this->assert(self::ASSERT_JSON, [$responseXssi->getContent()]);
             }
 
-            $subContent = $this->nodeGenerator->generate($response->getContent());
+            $subContent = $this->nodeGenerator->generate($responseXssi->getContent());
 
             $this->content
                 ->clearChildren()

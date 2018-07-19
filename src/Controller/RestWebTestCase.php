@@ -5,6 +5,7 @@ namespace RestTestHelper\Controller;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use RestTestHelper\Checker\Interfaces\NodeContentCheckerInterface;
 use RestTestHelper\Crawler\ResponseCrawlerInterface;
+use RestTestHelper\Decorator\ResponseXssi;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,7 +74,7 @@ abstract class RestWebTestCase extends WebTestCase
         $client = $this->getClient();
         $response = $this->request($client, $route, $routeParams, $method, $this->getJsonMockFileContent($filename));
 
-        $this->assertJson($response->getContent());
+        $this->assertJson((new ResponseXssi($response))->getContent());
         $this->assertEquals($expectedResponse, $response->getStatusCode());
 
         return $response;
@@ -85,7 +86,7 @@ abstract class RestWebTestCase extends WebTestCase
      */
     protected function getResponseContent(Response $response)
     {
-        return json_decode($response->getContent());
+        return json_decode((new ResponseXssi($response))->getContent());
     }
 
     /**
